@@ -1,0 +1,112 @@
+ ! NOAA/PMEL TMAP
+ ! FERRET v7.44 (optimized)
+ ! Linux 3.10.0-957.1.3.el7.x86_64 64-bit - 12/07/18
+ ! 24-Jun-20 10:14     
+
+use GLazur64-T20_y2009m06_m11_gridT_k1.nc
+show
+show data
+show d
+sha vosaline[l=1]
+sha vosaline[l=1], nav_lon, nav_lat
+set w 2
+sha vosaline[l=1]
+go land
+set w 1
+go land
+sha vosaline[l=1], nav_lon, nav_lat
+go land
+set w 2
+sha votemper[l=1], nav_lon, nav_lat
+set w 1
+sha/le=(33,38,0.2) vosaline[l=1], nav_lon, nav_lat
+sha/le=(34,38,0.2) vosaline[l=1], nav_lon, nav_lat
+sha/le=(34,37,0.2) vosaline[l=1], nav_lon, nav_lat
+sha/le=(-inf)(34,37,0.2)(inf) vosaline[l=1], nav_lon, nav_lat
+sha/le=(-inf)(35,38,0.2)(inf) vosaline[l=1], nav_lon, nav_lat
+sha/le=(-inf)(35.5,38,0.1)(inf) vosaline[l=1], nav_lon, nav_lat
+sha/le=(-inf)(35.5,37.5,0.1)(inf) vosaline[l=1], nav_lon, nav_lat
+sha/le=(-inf)(35.5,38.5,0.1)(inf) vosaline[l=1], nav_lon, nav_lat
+pal rainbow
+sha/le=(-inf)(35.5,38.5,0.1)(inf) vosaline[l=1], nav_lon, nav_lat
+sha/le=(-inf)(35.5,38.5,0.1)(inf)/pal=light_centered vosaline[l=1], nav_lon, nav_lat
+sha vosaline[l=1], nav_lon, nav_lat
+pal default
+sha vosaline[l=1], nav_lon, nav_lat
+sha votemper[l=1], nav_lon, nav_lat
+fill votemper[l=1], nav_lon, nav_lat
+use GLazur64-T20_y2009m06_m11_gridT_k58.nc
+fill votemper[l=1], nav_lon, nav_lat
+use GLazur64-T20_y2009m06_m11_gridU_k1.nc
+use GLazur64-T20_y2009m06_m11_gridU_k58.nc
+show d
+fill votemper[l=1], nav_lon, nav_lat
+fill votemper[l=1,d=2], nav_lon, nav_lat
+sha vozocrtx[l=1]
+sha/pal=light_centered/le=(-0.18,0.18) vozocrtx[l=1]
+sha/pal=light_centered/le=(-0.18,0.18,0.01) vozocrtx[l=1]
+sha/pal=light_centered/le=(-0.18,0.18,0.01) vozocrtx[l=1,d=1]
+sha/pal=light_centered/le=(-0.18,0.18,0.01) vozocrtx[l=1,d=3]
+sha/pal=light_centered/le=(-0.2,0.2,0.02) vozocrtx[l=1,d=3]
+sha/pal=light_centered/le=(-inf)(-0.2,0.2,0.02)(inf) vozocrtx[l=1,d=3]
+set w 2
+sha/pal=light_centered/le=(-inf)(-0.2,0.2,0.02)(inf) vozocrtx[l=1,d=4]
+sha/pal=light_centered/le=(-inf)(-0.2,0.2,0.02)(inf) vozocrtx[l=2,d=4]
+sha/pal=light_centered/le=(-inf)(-0.2,0.2,0.02)(inf) vozocrtx[l=10,d=4]
+sha/pal=light_centered/le=(-inf)(-0.2,0.2,0.02)(inf) vozocrtx[l=20,d=4]
+sha/pal=light_centered/le=(-inf)(-0.2,0.2,0.02)(inf) vozocrtx[l=30,d=4]
+sha/pal=light_centered/le=(-inf)(-0.2,0.2,0.02)(inf) vozocrtx[l=40,d=4]
+repeat/l=1:100:1000 (sha/pal=light_centered/le=(-inf)(-0.2,0.2,0.02)(inf) vozocrtx[d=4])
+repeat/l=1:1000:100 (sha/pal=light_centered/le=(-inf)(-0.2,0.2,0.02)(inf) vozocrtx[d=4])
+use GLazur64-T20_y2009m06_m11_gridV_k1.nc
+use GLazur64-T20_y2009m06_m11_gridV_k58.nc
+show d
+repeat/l=1:1000:100 (sha/pal=light_centered/le=(-inf)(-0.2,0.2,0.02)(inf) vomecrty[d=4])
+repeat/l=1:1000:100 (sha/pal=light_centered/le=(-inf)(-0.2,0.2,0.02)(inf) vomecrty)
+a=b+c
+let a=b+c
+sha a
+let c=1
+sha a
+let b=2
+sha a
+list a
+let ki=0.5*(VOZOCRTX^2+VOMECRTY^2)
+sha ki[l=1]
+show d
+let ki_z500=0.5*(VOZOCRTX[d=4]^2+VOMECRTY[d=6]^2)
+sha ki_z500
+sha ki_z500[l=1]
+vect VOZOCRTX[d=4],VOMECRTY[d=6]
+vect/l=1 VOZOCRTX[d=4],VOMECRTY[d=6]
+sha ki_z500[l=1]
+vect/l=1/ov VOZOCRTX[d=4],VOMECRTY[d=6]
+vect/l=1/ov/color=w VOZOCRTX[d=4],VOMECRTY[d=6]
+go land
+sha ki_z500[l=1], nav_lon,nav_lat
+vect/l=1/ov/color=w VOZOCRTX[d=4],VOMECRTY[d=6]
+vect/l=1/ov/color=w VOZOCRTX[d=4],VOMECRTY[d=6], nav_lon, nav_lat
+go land
+set w 1
+let ki_z0=0.5*(VOZOCRTX[d=3]^2+VOMECRTY[d=5]^2)
+sha ki_z500[l=1], nav_lon,nav_lat
+sha ki_z0[l=1], nav_lon,nav_lat
+sha/le=(0,0.1,0.01) ki_z0[l=1], nav_lon,nav_lat
+sha/le=(0,0.1,0.01)(inf) ki_z0[l=1], nav_lon,nav_lat
+vect/l=1/ov/color=w VOZOCRTX[d=3],VOMECRTY[d=5]
+vect/l=1/ov/color=w VOZOCRTX[d=3],VOMECRTY[d=5], nav_lon, nav_lat
+rep/l=1:1000:100 (sha/le=(0,0.1,0.01) ki_z0[l=1] \ vect/l=1/ov/color=w VOZOCRTX[d=3],VOMECRTY[d=5])
+rep/l=1:1000:100 (sha/le=(0,0.1,0.01) ki_z0[l=1]; \ vect/l=1/ov/color=w VOZOCRTX[d=3],VOMECRTY[d=5])
+rep/l=1:1000:100 (sha/le=(0,0.1,0.01) ki_z0; \ vect/ov/color=w VOZOCRTX[d=3],VOMECRTY[d=5])
+rep/l=1:1000:100 (sha/le=(0,0.1,0.01) ki_z0; vect/ov/color=w VOZOCRTX[d=3],VOMECRTY[d=5])
+rep/l=1:1000:100 (sha/le=(0,0.1,0.01)(inf) ki_z0; vect/ov/color=w VOZOCRTX[d=3],VOMECRTY[d=5]; pause)
+rep/l=1:1000:100 (sha/le=(0,0.1,0.01)(inf) ki_z0; vect/ov/color=w VOZOCRTX[d=3],VOMECRTY[d=5]; pause)
+rep/l=1:1000:10 (sha/le=(0,0.1,0.01)(inf) ki_z0; vect/ov/color=w VOZOCRTX[d=3],VOMECRTY[d=5]; pause)
+SET W 2
+rep/l=1:1000:10 (sha/le=(0,0.1,0.01)(inf) ki_z500; vect/ov/color=w VOZOCRTX[d=4],VOMECRTY[d=6]; pause)
+sha/le=(0,0.01,0.001)(inf) ki_z500[L=1]
+rep/l=1:1000:10 (sha/le=(0,0.001,0.0001)(inf) ki_z500; vect/ov/color=w VOZOCRTX[d=4],VOMECRTY[d=6]; pause)
+rep/l=1:1000:10 (sha/le=(0,0.01,0.001)(inf) ki_z500; vect/ov/color=w VOZOCRTX[d=4],VOMECRTY[d=6]; pause)
+rep/l=1:1000:100 (sha/le=(0,0.01,0.001)(inf) ki_z500; vect/ov/color=w VOZOCRTX[d=4],VOMECRTY[d=6]; pause)
+rep/l=1:3000:100 (sha/le=(0,0.01,0.001)(inf) ki_z500; vect/ov/color=w VOZOCRTX[d=4],VOMECRTY[d=6]; pause)
+exit

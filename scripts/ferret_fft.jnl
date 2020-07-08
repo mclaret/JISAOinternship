@@ -1,0 +1,73 @@
+ ! NOAA/PMEL TMAP
+ ! FERRET v7.44 (optimized)
+ ! Linux 3.10.0-957.1.3.el7.x86_64 64-bit - 12/07/18
+ ! 26-Jun-20 14:51     
+
+use GLazur64-T20_y2009m06_m11_gridU_k58.nc
+show d
+plot vozocrtx[i=250,j=50]
+let pi=4.*atan(1.)
+let omega=7.2921E-5
+let fCor=2.*omega*sin((nav_lat)/180*pi)
+sha fCor[l=1000]
+plot vozocrtx[i=250,j=50]
+set w 2
+let ufft=ffta(vozocrtx[i=250,j=50])
+plot ufft
+let fq=t[g=ufft]*2*pi/fCor[i=250,j=50]
+plot/vs/line fq,ufft
+plot/vs/line/hlim=0:2 fq,ufft
+let hpass=if fq lt 0.6 then 0 else 1
+plot hpass
+plot fq
+plot/vs/line fq,ufft
+plot fq
+let uhp=ufft*hpass
+plot/vs/line fq,uhp
+let uhp_phys=fft_inverse(uhp)
+fft_demo
+go fft_demo
+go ef_fft_demo
+go ef_fft_demo
+show/all var
+let ufft_re=fft_re(vozocrtx[i=250,j=50])
+let let fCor=2.*omega*sin((nav_lat)/180*pi)
+let fCor=2.*omega*sin((nav_lat)/180*pi)
+let fq=t[g=ufft]*2*pi/fCor[i=250,j=50]
+show/all var
+plot/vs/line fq,ufft_re
+let pi=4.*atan(1.)
+let omega=7.2921E-5
+let fCor=2.*omega*sin(($lat)/180*pi)
+let fCor=2.*omega*sin((nav_lat)/180*pi)
+plot/vs/line fq,ufft_re
+plot/vs/line fq,ufft_re
+show d
+use GLazur64-T20_y2009m06_m11_gridU_k58.nc
+plot/vs/line fq,ufft_re
+show/all var
+FQ = T[G=UFFT_RE]*2*PI/FCOR[I=250,J=50]
+let FQ = T[G=UFFT_RE]*2*PI/FCOR[I=250,J=50]
+plot/vs/line fq,ufft_re
+ca/all w
+plot/vs/line fq,ufft_re
+set w 1
+plot/vs/line fq,ufft_re
+let ufft_im=fft_im(vozocrtx[i=250,j=50])
+plot/vs/line fq,ufft_im
+let hpass=if fq lt 0.6 then 0 else 1
+show/all var
+let ufft_im_hp=UFFT_IM*hpass
+plot/vs/line/ov fq,ufft_im_hp
+let ufft_re_hp=UFFT_RE*hpass
+let u_hp=fft_inverse(ufft_re_hp,ufft_im_hp)
+plot u_hp
+plot vozocrtx[i=250,j=50]
+plot/ov u_hp
+plot u_hp
+show grid u_hp vozocrtx
+plot u_hp[gt=time_counter]
+plot u_hp[gt=time_counter@asn]
+plot vozocrtx[i=250,j=50]
+plot/ov u_hp[gt=time_counter@asn]
+exit

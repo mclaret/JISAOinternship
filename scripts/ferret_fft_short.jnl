@@ -1,0 +1,76 @@
+ ! NOAA/PMEL TMAP
+ ! FERRET v7.44 (optimized)
+ ! Linux 3.10.0-957.1.3.el7.x86_64 64-bit - 12/07/18
+ ! 26-Jun-20 15:35     
+
+use GLazur64-T20_y2009m06_m11_gridU_k58.nc
+plot vozocrtx[i=250,j=50]
+show grid
+plot vozocrtx[i=250,j=50,i=100:3648]
+plot vozocrtx[i=250,j=50,l=100:3648]
+plot vozocrtx[i=250,j=50,l=100:200]
+plot vozocrtx[i=250,j=50,l=500:600]
+plot vozocrtx[i=250,j=50,l=500:700]
+let uffta=ffta(vozocrtx[i=250,j=50])
+plot vozocrtx[i=250,j=50,l=500:700]
+plot vozocrtx[i=250,j=50]
+plot uftta
+let uffta=ffta(vozocrtx[i=250,j=50])
+plot uftta
+plot ufta
+plot uffta
+plot/hlim=0:5.e-5 uffta
+let fCor=2.*omega*sin((nav_lat)/180*pi)
+let omega=7.2921E-5
+let fq=t[g=uffta]*2*pi/fCor[i=250,j=50]
+plot/vs/line fq,uffta
+let pi=4.*atan(1.)
+plot/vs/line fq,uffta
+plot/vs/line/hlim=0:2 fq,uffta
+let hpass=if fq lt 0.6 then 0 else 1
+let ufft_re=fft_re(vozocrtx[i=250,j=50])
+let ufft_im=fft_im(vozocrtx[i=250,j=50])
+let ufft_am=(ufft_re^2+ufft_im^2)^(0.5)
+plot/ov/vs/line fq,ufft_am
+plot/ov/vs/line fq,ufft_am*hpass
+let ufft_re_hp=ufft_re*hpass
+let ufft_im_hp=ufft_im*hpass
+let u_hp=fft_inverse(ufft_re_hp,ufft_im_hp)
+set w 2
+plot u_hp[gt=time_counter@asn]
+plot vozocrtx[i=250,j=50]
+plot vozocrtx[i=250,j=50,i=100:3648]
+plot vozocrtx[i=250,j=50,l=100:3648]
+plot/ov u_hp[gt=time_counter@asn]
+let ip=36
+let ulp=vozocrtx[l=@sbx:`ip`]
+let uhp=vozocrtx-ulp
+plot/ov uhp
+plot/ov uhp[i=250,j=50]
+set w 3
+plot/ov uhp[i=250,j=50,l=100:200]
+plot uhp[i=250,j=50,l=100:200]
+plot/ov u_hp[i=250,j=50,l=100:200]
+let u_hp_t=[gt=time_counter@asn]
+let u_hp_t=u_hp[gt=time_counter@asn]
+plot/ov u_hp_t[i=250,j=50,l=100:200]
+plot/ov/color=r u_hp_t[i=250,j=50,l=100:200]
+let ip=100
+let ulp=vozocrtx[k=1,l=@sbx:`ip`]
+plot/ov u_hp[i=250,j=50,l=100:200]
+plot/ov uhp[i=250,j=50,l=100:200]
+plot/ov/color=g uhp[i=250,j=50,l=100:200]
+show/all var
+list 1/fcor
+list fcor[i=250,j=50]
+list 1/fcor[i=250,j=50]
+list 1/fcor[i=250,j=50]/3600
+list 1/fcor[i=250,j=50]/3600*2*pi
+let ip=36
+let ip=23
+let ulp=vozocrtx[k=1,l=@sbx:`ip`]
+plot/ov uhp[i=250,j=50,l=100:200]
+plot/ov/color=b uhp[i=250,j=50,l=100:200]
+plot/ov/color=blue uhp[i=250,j=50,l=100:200]
+plot/ov/color=r u_hp_t[i=250,j=50,l=100:200]
+exit
